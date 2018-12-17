@@ -18,3 +18,105 @@ These skills are covered in the following courses:
 - [HTML and CSS Syntax](https://github.com/bolunzhang/intro-to-html-and-css)
 - [Intro to JavaScript](https://www.udacity.com/course/intro-to-javascript--ud803)
 
+## Lesson 1: The Document Object Model
+
+### Introduction
+
+You'll be learning so many things in this course! Here are the topics for each lesson:
+
+- Lesson 1 - The Document Object Model
+- Lesson 2 - Creating Content with JavaScript
+- Lesson 3 - Working with Browser Events
+- Lesson 4 - Performance
+
+In Lesson 1, we'll take a dive into what the Document Object Model (DOM) is, how it gets created, and how we can access it with JavaScript.
+
+In Lesson 2, you'll learn to interact with page content using JavaScript. You'll use the skills gained from the first lesson to JavaScript and the DOM to update existing page content, create new page content, add new content to the page, programmatically remove page content, and finally how to style page elements.
+
+In Lesson 3, you'll learn about browser events. There is an entire world of thousands of browser events that are happening when you interact with a website. You can't see them directly, but you'll learn about them, how to listen for them, and how to respond when they occur.
+
+In Lesson 4, you'll learn about Performance. It's never too early to start thinking about the performance implications of code. In this course we'll be writing code that can drastically change website (both its content and its looks!), so we need to make sure that the code we write is both functional and efficient.
+
+As you can see, this course is packed with a ton of information! I hope you're excited to begin!
+
+To be successful in this program, there are a number of technologies that you need to know how to use:
+
+- HTML
+- CSS
+- JavaScript
+
+With JavaScript, though, it's imperative that you understand the basics of the language (variables, data types, loops, etc.). The course is called "JavaScript and the DOM", so JavaScript knowledge is vital for you to succeed.
+
+The following are a few quiz questions to get you back in the mindset of writing JavaScript.
+
+Q1. Which of the following is the correct way to declare a variable in JavaScript? (assume each line is run in isolation)
+
+- [ ] `name: 'Dominique';`
+- [x] `const name = 'Miguel';`
+- [x] `var name = 'Orvin';`
+- [ ] `set(name, 'Kagure');`
+
+Q2. Given `const locations = ['Florida', 'England', 'Malaysia', 'South Africa', 'Fiji', 'China'];`, which of the following correctly access the string `'Malaysia'`?
+
+- [ ] `locations['Malaysia'];`
+- [x] `locations[2];`
+- [ ] `locations[3];`
+
+Throughout this course, you'll be using lot of fundamental JavaScript skills, so if you're feeling a bit rusty, make sure to brush up on them now before we start diving into this new content.
+
+And speaking of this new content, we're going to be covering some really exciting stuff!
+
+Throughout this course, you'll level up not only your web knowledge, but also your browser and JavaScript knowledge, so get excited!
+
+### The DOM
+
+In this section, we'll look at the Document Object Model - otherwise known as the DOM.
+
+The words "the DOM" are used all over developer documentation sites and tutorials on writing interactive JavaScript code. But what is it? Perhaps you've used even used the DOM and still aren't quite sure what it is. Is it the browser? Is it a special part of JavaScript? ¯\_(ツ)_/¯
+
+[![DOM Explanation By Illya](https://img.youtube.com/vi/gndOFastyus/0.jpg)](https://www.youtube.com/watch?v=gndOFastyus)
+
+To recap the video, the following steps happen:
+
+- HTML is received
+- HTML tags are converted to tokens
+- tokens are converted to Nodes
+- Nodes are converted to the DOM
+
+When you request a website, no matter what backend language is powering that website, it will respond with HTML. The browser receives a stream of HTML. The bytes are run through a complicated (but fully documented) parsing process that determines the different characters (e.g. the start tag character `<`, an attribute like `href`, a closing angle bracket like `>`). After parsing has occurred, a process called tokenization. **Tokenization** takes one character at a time and builds up **tokens**. The tokens are:
+
+- DOCTYPE
+- start tag
+- end tag
+- comment
+- character
+- end-of-file
+
+Let's take a break for a second. At this state, the browser has received the bytes that've been sent by a server. The browser has converted the bytes to tags and has read through the tags to create a list of tokens.
+
+This list of tokens then goes through the tree construction stage. The output of this stage is a **tree-like structure** - this is the DOM!
+
+I want to point out two important quotes that Illya said in the video:
+
+- *a tree structure that captures the content and properties of the HTML and all the relationships between the nodes*
+
+- *the DOM is the full, parsed representation of the HTML*
+
+So the DOM is a model (representation) of the relationships and attributes of the HTML document that was received. Remember that DOM stands for "Document Object Model". Something that I've found to be true as I've been learning is that to break something down, just read the thing backwards:
+
+Document Object Model
+
+...would become…
+
+**Object Model of the Document!**
+
+Remember that a JavaScript object is a tree-like structure that has properties and values. So the DOM can be accessed using a special object provided by the browser: `document`
+
+Try this:
+
+1. open the console on this page
+2. type out the word `document`
+    - careful not to declare it `const document`
+    - careful not to wrap it in quotes `"document"`
+3. press enter
+
