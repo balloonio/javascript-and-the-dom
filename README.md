@@ -1,12 +1,23 @@
-# JavaScript and the DOM - dynamically control the browser
+# JavaScript and the DOM
 
 Learning notes and hand-ons for Udacity course [JavaScript and the DOM](https://www.udacity.com/course/javascript-and-the-dom--ud117).
 
-*JavaScript is an extremely powerful programming language. One place where its power truly shines is using it to control a web page. Through this course, you'll learn about the Document Object Model (DOM), how it's created, and what capabilities it provides. Then you'll use JavaScript and the DOM to add, delete, or alter page content; control page styling, and respond to user actions.*
+>*JavaScript is an extremely powerful programming language. One place where its power truly shines is using it to control a web page. Through this course, you'll learn about the Document Object Model (DOM), how it's created, and what capabilities it provides. Then you'll use JavaScript and the DOM to add, delete, or alter page content; control page styling, and respond to user actions.*
 
-Course type: Free  
-Timeline: Approx. 4 Weeks  
-Skill level: Intermediate
+<table>
+    <tr>
+        <th>Course type</th>
+        <td>Free</td>
+    </tr>
+    <tr>
+        <th>Timeline</th>
+        <td>Approx. 4 Weeks</td>
+    </tr>
+    <tr>
+        <th>Skill level</th>
+        <td>Intermediate</td>
+    </tr>
+</table>
 
 Prerequisites and Requirements - Students should have experience with the following skills:
 - building a website with HTML
@@ -17,6 +28,15 @@ Prerequisites and Requirements - Students should have experience with the follow
 These skills are covered in the following courses:
 - [HTML and CSS Syntax](https://github.com/bolunzhang/intro-to-html-and-css)
 - [Intro to JavaScript](https://www.udacity.com/course/intro-to-javascript--ud803)
+
+Table of Content
+
+- [Lesson 1: The Document Object Model](#lesson-1-the-document-object-model)
+  - [Introduction](#introduction)
+  - [The DOM](#the-dom)
+    - [DOM Explained](#dom-explained)
+    - [The DOM Recap](#the-dom-recap)
+    - [Further Research](#further-research)
 
 ## Lesson 1: The Document Object Model
 
@@ -74,6 +94,8 @@ In this section, we'll look at the Document Object Model - otherwise known as th
 
 The words "the DOM" are used all over developer documentation sites and tutorials on writing interactive JavaScript code. But what is it? Perhaps you've used even used the DOM and still aren't quite sure what it is. Is it the browser? Is it a special part of JavaScript? ¯\_(ツ)_/¯
 
+#### DOM Explained
+
 [![DOM Explanation By Illya](https://img.youtube.com/vi/gndOFastyus/0.jpg)](https://www.youtube.com/watch?v=gndOFastyus)
 
 To recap the video, the following steps happen:
@@ -98,11 +120,11 @@ This list of tokens then goes through the tree construction stage. The output of
 
 I want to point out two important quotes that Illya said in the video:
 
-- *a tree structure that captures the content and properties of the HTML and all the relationships between the nodes*
+- >*a tree structure that captures the content and properties of the HTML and all the relationships between the nodes*
 
-- *the DOM is the full, parsed representation of the HTML*
+- >*the DOM is the full, parsed representation of the HTML*
 
-So the DOM is a model (representation) of the relationships and attributes of the HTML document that was received. Remember that DOM stands for "Document Object Model". Something that I've found to be true as I've been learning is that to break something down, just read the thing backwards:
+**So the DOM is a model (representation) of the relationships and attributes of the HTML document that was received.** Remember that DOM stands for "Document Object Model". Something that I've found to be true as I've been learning is that to break something down, just read the thing backwards:
 
 Document Object Model
 
@@ -120,3 +142,40 @@ Try this:
     - careful not to wrap it in quotes `"document"`
 3. press enter
 
+The `document` object is provided by the browser and is a representation of the HTML document. This object is **not** provided by the JavaScript language. ECMAScript is the language specification that JavaScript is based on, and it only references the document object model in one place, in its "Global Object" section:
+
+>*In addition to the properties defined in this specification the global object may have additional host defined properties. This may include a property whose value is the global object itself; for example, in the HTML document object model the window property of the global object is the global object itself. ([source](https://www.ecma-international.org/ecma-262/#sec-global-object))*
+
+Basically, this says that the `document` object is not part of JavaScript, but is expected to **already** exist and be freely accessible to JavaScript code.
+
+The DOM is standardized by the W3C. There are a number of specifications that make up the DOM, here are few:
+
+- Core Specification
+- Events Specification
+- Style Specification
+- Validation Specification
+- Load and Save Specification
+
+To see the full list of DOM specs, check out the [standard](https://www.w3.org/standards/techs/dom#w3c_all).
+
+#### The DOM Recap
+
+The DOM stands for "Document Object Model" and is a tree-like structure that is a representation of the HTML document, the relationship between elements, and contains the content and properties of the elements.
+
+The DOM is **not**:
+
+- part of the JavaScript language
+
+The DOM is:
+
+- constructed from the browser
+- is globally accessible by JavaScript code using the `document` object
+
+The DOM is used all of the time and is what we'll be using throughout this course!
+
+#### Further Research
+
+- [DOM Introduction](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction)
+- [Section 8.2 Parsing HTML documents from the W3C's HTML Documentation](https://www.w3.org/TR/html5/syntax.html#parsing)
+- [DOM Specification on W3C](https://www.w3.org/standards/techs/dom#w3c_all)
+- [HTML Document Object Model mentioned in the ECMAScript Specification](https://www.ecma-international.org/ecma-262/#sec-global-object) - the language specification used by JavaScript
