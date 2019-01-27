@@ -162,7 +162,7 @@ The DOM is standardized by the W3C. There are a number of specifications that ma
 
 To see the full list of DOM specs, check out the [standard](https://www.w3.org/standards/techs/dom#w3c_all).
 
-#### Recap
+#### The DOM Recap
 
 The DOM stands for "Document Object Model" and is a tree-like structure that is a representation of the HTML document, the relationship between elements, and contains the content and properties of the elements.
 
