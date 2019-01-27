@@ -26,6 +26,7 @@ Prerequisites and Requirements - Students should have experience with the follow
 - looping through data (e.g. the for loop)
 
 These skills are covered in the following courses:
+
 - [HTML and CSS Syntax](https://github.com/bolunzhang/intro-to-html-and-css)
 - [Intro to JavaScript](https://www.udacity.com/course/intro-to-javascript--ud803)
 
@@ -37,7 +38,9 @@ Table of Content
   - [Selecting Page Elements With CSS Selectors](#selecting-page-elements-with-css-selectors)
   - [Select Page Element By ID](#select-page-element-by-id)
   - [Select Page Elements By Class Or Tag](#select-page-elements-by-class-or-tag)
-  - [Nodes, Elements, and Interfaces...Oh My!](#nodes-elements-and-interfaces-Oh-my)
+  - [Nodes, Elements, and Interfaces...Oh My!](#nodes-elements-and-interfacesoh-my)
+  - [More Ways To Access Elements](#more-ways-to-access-elements)
+  - [Lesson summary](#lesson-summary)
 
 ## Lesson 1: The Document Object Model
 
@@ -264,6 +267,7 @@ There are a couple of important things to keep in mind about this method:
 ### Select Page Elements By Class Or Tag
 
 #### Selecting Multiple Elements At Once
+
 As I'm sure you remember from learning both HTML structure and CSS styling, an ID should be unique - meaning two or more elements should never have the same ID. Since IDs are unique, and since there will be only one element in the HTML with that ID, `document.getElementById()` will only ever return at most one element. So how would we select multiple DOM elements?
 
 The next two DOM methods that we'll be looking at that both return multiple elements are:
@@ -304,3 +308,85 @@ There are a few important things to keep in mind about these two methods:
 - [`.getElementsByTagName()` on MDN](https://developer.mozilla.org/en-US/docs/Web/API/Element/getElementsByTagName)
 
 ### Nodes, Elements, and Interfaces...Oh My
+
+How the DOM is constructed in the correct order of operation:
+
+- characters
+- tags
+- tokens
+- nodes
+- DOM
+
+But what is a "node", exactly?
+
+![node](https://d17h27t6h515a5.cloudfront.net/topher/2017/December/5a22d197_ud117-l1-interface-chain/ud117-l1-interface-chain.jpg)
+
+>A "node", in this context, is simply an HTML element. The "DOM" is a tree structure that represents the HTML of the website, and every HTML element is a "node". See Document Object Model (DOM).
+> 
+> More specifically, "Node" is an interface that is implemented by multiple other objects, including "document" and "element". All objects implementing the "Node" interface can be treated similarly. The term "node" therefore (in the DOM context) means any object that implements the "Node" interface. Most commonly that is an element object representing a HTML element.
+> https://stackoverflow.com/questions/24974621/what-is-a-node-in-javascript
+
+### More Ways To Access Elements
+
+#### The querySelector Method
+
+We can use the `.querySelector()` method to select elements just like we do with CSS. We use the `.querySelector()` method and pass it a string that's just like a CSS selector:
+
+```js
+// find and return the element with an ID of "header"
+document.querySelector('#header');
+
+// find and return the first element with the class "header"
+document.querySelector('.header');
+
+// find and return the first <header> element
+document.querySelector('header');
+```
+
+⚠️ `.querySelector()` Returns A Single Element ⚠️
+
+This makes sense if you use it to search for an element by ID. However, even though `.getElementsByClassName()` and `.getElementsByTagName()` both return a list of multiple elements, using `.querySelector()` with a class selector or a tag selector will still only return the first item it finds.
+
+#### The querySelectorAll Method
+
+The `.querySelector()` method returns only one element from the DOM (if it exists). However, there are definitely times when you will want to get a list of all elements with a certain class or all of one type of element (e.g. all `<tr>` tags). We can use the `.querySelectorAll()` method to do this!
+
+```js
+// find and return a list of elements with the class "header"
+document.querySelectorAll('.header');
+
+// find and return a list of <header> elements
+document.querySelectorAll('header');
+```
+
+#### Recap
+
+In this section, we took a brief look the history of browser support for standard DOM methods, the rise of the jQuery library, and how jQuery's success brought about new DOM methods. The new DOM methods we looked at are
+
+- `.querySelector()` - returns a single element
+- `.querySelectorAll()` - returns a list of elements
+
+```js
+// find and return the element with an ID of "header"
+document.querySelector('#header');
+
+// find and return a list of elements with the class "header"
+document.querySelectorAll('.header');
+```
+
+We also took a brief look that the list returned by `.querySelectorAll()` is a NodeList. We saw that it is possible to loop over a NodeList with either its `.forEach()` method, or the humble `for` loop:
+
+```js
+const allHeaders = document.querySelectorAll('header');
+
+for(let i = 0; i < allHeaders.length; i++){
+    console.dir(allHeaders[i]);
+}
+```
+
+### Lesson summary
+
+- DOM
+- How DOM constructed
+- Node and Element interfaces
+- How to select elements
