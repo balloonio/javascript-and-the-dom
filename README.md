@@ -37,7 +37,8 @@ Table of Content
   - [Selecting Page Elements With CSS Selectors](#selecting-page-elements-with-css-selectors)
   - [Select Page Element By ID](#select-page-element-by-id)
   - [Select Page Elements By Class Or Tag](#select-page-elements-by-class-or-tag)
-  - [Nodes, Elements, and Interfaces...Oh My!](#nodes-elements-and-interfaces-Oh-my)
+  - [Nodes, Elements, and Interfaces...Oh My!](#nodes-elements-and-interfacesoh-my)
+  - [More Ways To Access Elements](#more-ways-to-access-elements)
 
 ## Lesson 1: The Document Object Model
 
@@ -304,3 +305,39 @@ There are a few important things to keep in mind about these two methods:
 - [`.getElementsByTagName()` on MDN](https://developer.mozilla.org/en-US/docs/Web/API/Element/getElementsByTagName)
 
 ### Nodes, Elements, and Interfaces...Oh My
+
+How the DOM is constructed in the correct order of operation:
+- characters
+- tags
+- tokens
+- nodes
+- DOM
+
+But what is a "node", exactly?
+
+![](https://d17h27t6h515a5.cloudfront.net/topher/2017/December/5a22d197_ud117-l1-interface-chain/ud117-l1-interface-chain.jpg)
+
+>A "node", in this context, is simply an HTML element. The "DOM" is a tree structure that represents the HTML of the website, and every HTML element is a "node". See Document Object Model (DOM).
+> 
+> More specifically, "Node" is an interface that is implemented by multiple other objects, including "document" and "element". All objects implementing the "Node" interface can be treated similarly. The term "node" therefore (in the DOM context) means any object that implements the "Node" interface. Most commonly that is an element object representing a HTML element.
+> https://stackoverflow.com/questions/24974621/what-is-a-node-in-javascript
+
+### More Ways To Access Elements
+
+We can use the `.querySelector()` method to select elements just like we do with CSS. We use the `.querySelector()` method and pass it a string that's just like a CSS selector:
+
+```
+// find and return the element with an ID of "header"
+document.querySelector('#header');
+
+// find and return the first element with the class "header"
+document.querySelector('.header');
+
+// find and return the first <header> element
+document.querySelector('header');
+```
+
+⚠️ `.querySelector()` Returns A Single Element ⚠️
+
+This makes sense if you use it to search for an element by ID. However, even though `.getElementsByClassName()` and `.getElementsByTagName()` both return a list of multiple elements, using `.querySelector()` with a class selector or a tag selector will still only return the first item it finds.
+
