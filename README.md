@@ -26,6 +26,7 @@ Prerequisites and Requirements - Students should have experience with the follow
 - looping through data (e.g. the for loop)
 
 These skills are covered in the following courses:
+
 - [HTML and CSS Syntax](https://github.com/bolunzhang/intro-to-html-and-css)
 - [Intro to JavaScript](https://www.udacity.com/course/intro-to-javascript--ud803)
 
@@ -34,9 +35,12 @@ Table of Content
 - [Lesson 1: The Document Object Model](#lesson-1-the-document-object-model)
   - [Introduction](#introduction)
   - [The DOM](#the-dom)
-    - [DOM Explained](#dom-explained)
-    - [The DOM Recap](#the-dom-recap)
-    - [Further Research](#further-research)
+  - [Selecting Page Elements With CSS Selectors](#selecting-page-elements-with-css-selectors)
+  - [Select Page Element By ID](#select-page-element-by-id)
+  - [Select Page Elements By Class Or Tag](#select-page-elements-by-class-or-tag)
+  - [Nodes, Elements, and Interfaces...Oh My!](#nodes-elements-and-interfacesoh-my)
+  - [More Ways To Access Elements](#more-ways-to-access-elements)
+  - [Lesson summary](#lesson-summary)
 
 ## Lesson 1: The Document Object Model
 
@@ -179,3 +183,210 @@ The DOM is used all of the time and is what we'll be using throughout this cours
 - [Section 8.2 Parsing HTML documents from the W3C's HTML Documentation](https://www.w3.org/TR/html5/syntax.html#parsing)
 - [DOM Specification on W3C](https://www.w3.org/standards/techs/dom#w3c_all)
 - [HTML Document Object Model mentioned in the ECMAScript Specification](https://www.ecma-international.org/ecma-262/#sec-global-object) - the language specification used by JavaScript
+
+### Selecting Page Elements With CSS Selectors
+
+Which of the following will style an element by its ID?
+
+- [ ] `.left-nav { ... }`
+- [ ] `.id { ... }`
+- [x] `#footer { ... }`
+- [ ] `p { ... }`
+
+Which of the following will style the element by its class?
+
+- [x] `.left-nav { ... }`
+- [x] `.id { ... }`
+- [ ] `#footer { ... }`
+- [ ] `p { ... }`
+
+Which of the following will style an element by targeting the tag name?
+
+- [ ] `.left-nav { ... }`
+- [ ] `.id { ... }`
+- [ ] `#footer { ... }`
+- [x] `p { ... }`
+
+So this was a quick review on how to select elements by ID, class, and tag. Believe it or not, being able to select HTML elements this way is actually going to be a vital skill in this section where we learn how to access page elements using JavaScript and the DOM!
+
+### Select Page Element By ID
+
+`document.getElementById();`
+
+For example: `document.getElementById('footer');`
+
+One thing to notice right off the bat, is that we're passing `'footer'`, not `'#footer'`. It already knows that it's searching for an ID (its name is "getElementById", for a reason!).
+
+If you'd like to read more about this method, check out its documentation page on MDN: https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById
+
+Let's use this MDN documentation page to try out using this method.
+
+[![MDN Documentation page](https://img.youtube.com/vi/HTwkHkERtvQ/0.jpg)](https://www.youtube.com/watch?v=HTwkHkERtvQ)
+
+To recap what we just did:
+
+- we opened the DevTools for the page we were looking at
+- we switched to the Console pane
+- we ran document.getElementById('content'); on the console
+
+Running this code cause the `document` object to search through its entire tree-like structure for the element that has an ID of "content".
+
+Now, what do you think will happen if you used `document.getElementById(<some-nonexistent-ID>)` to search for some ID that doesn't actually exist in the HTML page?
+
+- [ ] a dummy element will be returned
+- [ ] `false` will be returned
+- [x] `null` will be returned
+- [ ] it will cause an error
+
+Which of the following will select the element with the ID of `logo`?
+
+- [x] `document.getElementById('logo');`
+- [ ] `document.getElementByID('logo');`
+- [ ] `document.getElementByID('#logo');`
+- [ ] `document.selectElementByID('logo');`
+
+Write the DOM code to select the element with ID strawberry-banner.
+
+`document.getElementById("strawberry-banner")`
+
+#### Recap
+
+In this section, we learned how to select a DOM element by its ID:
+
+- `.getElementById()`
+
+There are a couple of important things to keep in mind about this method:
+
+- it is called on the document object
+- it returns a **single** item
+
+#### Further Research
+
+[`.getElementById()` on MDN](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById) 
+
+### Select Page Elements By Class Or Tag
+
+#### Selecting Multiple Elements At Once
+
+As I'm sure you remember from learning both HTML structure and CSS styling, an ID should be unique - meaning two or more elements should never have the same ID. Since IDs are unique, and since there will be only one element in the HTML with that ID, `document.getElementById()` will only ever return at most one element. So how would we select multiple DOM elements?
+
+The next two DOM methods that we'll be looking at that both return multiple elements are:
+
+- `.getElementsByClassName()`
+- `.getElementsByTagName()`
+
+Accessing Elements By Their Class: `document.getElementsByClassName('brand-color');`
+
+Accessing Elements By Their Tag: `document.getElementsByTagName('p');`
+
+Both `.getElementsByClassName()` and `.getElementsByTagName()` have an extra "s" in their name.
+
+Write the DOM code to select all `<article>` elements:
+`document.getElementsByTagName('article');`
+
+Write the DOM code to select all elements with class: `fancy-footer`:
+`document.getElementsByClassName('fancy-footer')`
+
+We just saw that `.getElementsByClassName()` returns an array-like data structure of elements. But what exactly is an element?
+
+#### Selecting Multiple Elements At Once Recap
+
+In this section, we learned two ways to select multiple DOM elements:
+
+- `.getElementsByClassName()`
+- `.getElementsByTagName()`
+
+There are a few important things to keep in mind about these two methods:
+
+- both methods use the document object
+- both return multiple items
+- the list that's returned is not an array
+
+#### Further Research
+
+- [`.getElementsByClassName()` on MDN](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByClassName)
+- [`.getElementsByTagName()` on MDN](https://developer.mozilla.org/en-US/docs/Web/API/Element/getElementsByTagName)
+
+### Nodes, Elements, and Interfaces...Oh My
+
+How the DOM is constructed in the correct order of operation:
+
+- characters
+- tags
+- tokens
+- nodes
+- DOM
+
+But what is a "node", exactly?
+
+![node](https://d17h27t6h515a5.cloudfront.net/topher/2017/December/5a22d197_ud117-l1-interface-chain/ud117-l1-interface-chain.jpg)
+
+>A "node", in this context, is simply an HTML element. The "DOM" is a tree structure that represents the HTML of the website, and every HTML element is a "node". See Document Object Model (DOM).
+> 
+> More specifically, "Node" is an interface that is implemented by multiple other objects, including "document" and "element". All objects implementing the "Node" interface can be treated similarly. The term "node" therefore (in the DOM context) means any object that implements the "Node" interface. Most commonly that is an element object representing a HTML element.
+> https://stackoverflow.com/questions/24974621/what-is-a-node-in-javascript
+
+### More Ways To Access Elements
+
+#### The querySelector Method
+
+We can use the `.querySelector()` method to select elements just like we do with CSS. We use the `.querySelector()` method and pass it a string that's just like a CSS selector:
+
+```js
+// find and return the element with an ID of "header"
+document.querySelector('#header');
+
+// find and return the first element with the class "header"
+document.querySelector('.header');
+
+// find and return the first <header> element
+document.querySelector('header');
+```
+
+⚠️ `.querySelector()` Returns A Single Element ⚠️
+
+This makes sense if you use it to search for an element by ID. However, even though `.getElementsByClassName()` and `.getElementsByTagName()` both return a list of multiple elements, using `.querySelector()` with a class selector or a tag selector will still only return the first item it finds.
+
+#### The querySelectorAll Method
+
+The `.querySelector()` method returns only one element from the DOM (if it exists). However, there are definitely times when you will want to get a list of all elements with a certain class or all of one type of element (e.g. all `<tr>` tags). We can use the `.querySelectorAll()` method to do this!
+
+```js
+// find and return a list of elements with the class "header"
+document.querySelectorAll('.header');
+
+// find and return a list of <header> elements
+document.querySelectorAll('header');
+```
+
+#### Recap
+
+In this section, we took a brief look the history of browser support for standard DOM methods, the rise of the jQuery library, and how jQuery's success brought about new DOM methods. The new DOM methods we looked at are
+
+- `.querySelector()` - returns a single element
+- `.querySelectorAll()` - returns a list of elements
+
+```js
+// find and return the element with an ID of "header"
+document.querySelector('#header');
+
+// find and return a list of elements with the class "header"
+document.querySelectorAll('.header');
+```
+
+We also took a brief look that the list returned by `.querySelectorAll()` is a NodeList. We saw that it is possible to loop over a NodeList with either its `.forEach()` method, or the humble `for` loop:
+
+```js
+const allHeaders = document.querySelectorAll('header');
+
+for(let i = 0; i < allHeaders.length; i++){
+    console.dir(allHeaders[i]);
+}
+```
+
+### Lesson summary
+
+- DOM
+- How DOM constructed
+- Node and Element interfaces
+- How to select elements
