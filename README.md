@@ -33,7 +33,7 @@ These skills are covered in the following courses:
 Table of Content
 
 - [Lesson 1: The Document Object Model](#lesson-1-the-document-object-model)
-  - [Introduction](#introduction)
+  - [Introduction](#lesson1-introduction)
   - [The DOM](#the-dom)
   - [Selecting Page Elements With CSS Selectors](#selecting-page-elements-with-css-selectors)
   - [Select Page Element By ID](#select-page-element-by-id)
@@ -41,10 +41,13 @@ Table of Content
   - [Nodes, Elements, and Interfaces...Oh My!](#nodes-elements-and-interfacesoh-my)
   - [More Ways To Access Elements](#more-ways-to-access-elements)
   - [Lesson summary](#lesson-summary)
+- [Lesson 2: Creating Content with JavaScript](#lesson-2-creating-content-with-javascript)
+  - [Introduction](#lesson2-introduction)
+  - [Update Existing Page Content](#update-existing-page-content)
 
 ## Lesson 1: The Document Object Model
 
-### Introduction
+### Introduction <a id="lesson1-introduction"></a>
 
 You'll be learning so many things in this course! Here are the topics for each lesson:
 
@@ -390,3 +393,105 @@ for(let i = 0; i < allHeaders.length; i++){
 - How DOM constructed
 - Node and Element interfaces
 - How to select elements
+
+## Lesson 2: Creating Content with JavaScript
+
+### Introduction <a id="lesson2-introduction"></a>
+
+#### Need to Know
+
+To be successful in this section, there are a couple of things from the previous section that you need to know. You need to have a solid grasp of selecting DOM elements using:
+
+- `document.getElementById()`
+- `document.querySelector()`
+
+Also, remember the Node Interface and the Element interface we went over in the previous section? Understanding how an interface determines the properties and methods for an element and understanding how to research an interface's properties and methods will be vital in this lesson.
+
+If you get stuck, just jump back to the previous section that's giving you a bit of trouble.
+
+#### Project Repository
+
+Throughout this course, you'll learn skills and techniques to access and modify page content. There's no better way to demonstrate these skills than through trying them out on a real website! So I've created a copy of just the Udacity homepage. The project is on GitHub, so please clone the project to your local so that you can follow along.
+
+Project repository: https://github.com/udacity/course-JS-and-the-DOM
+
+### Update Existing Page Content
+
+#### An Element's Inner HTML
+
+Every element inherits properties and methods from the Element Interface (remember this from the previous lesson!). This means that every element has an `.innerHTML` **property**. This property, as it's rightly named, represents the markup of the element's content. We can use this property to:
+
+- get an element's (and all of its descendants!) HTML content
+- set an element's HTML content
+
+What does `.innerHTML` return?
+
+- [ ] a DOM element
+- [ ] a Node
+- [x] a string
+- [ ] an array
+- [ ] an object
+
+If you look at this in the console, it looks like a string. Technically, however, what it returns is called a `DOMString`.
+
+>💡 Innie vs Outie 💡
+>The `.innerHTML` property sets or returns the HTML content inside the selected element (i.e. between the tags).
+>
+>There's also the rarely used `.outerHTML` property. `.outerHTML` represents the HTML element itself, as well as its children.
+
+```js
+<h1 id="pick-me">Greetings To <span>All</span>!</h1>
+
+const innerResults = document.querySelector('#pick-me').innerHTML;
+console.log(innerResults); // logs the string: "Greetings To <span>All</span>!"
+
+const outerResults = document.querySelector('#pick-me').outerHTML;
+console.log(outerResults); // logs the string: "<h1 id="pick-me">Greetings To <span>All</span>!</h1>"
+```
+
+#### An Element's Text Content
+
+So `.innerHTML` will get/set an element's HTML content. If we just want the text content, we can use the fantastically named `.textContent` property!
+
+The `.textContent` property will:
+
+- set the text content of an element and all its descendants
+- return the text content of an element and all its descendants
+
+We just saw that passing text that contains HTML characters to `.textContent` will not display the content as HTML. Instead, it will still display everything as text - even the HTML characters!
+
+If you'd like to update an element, including its HTML, then you need to use the `.innerHTML` property:
+
+```js
+myElement.textContent = 'The <strong>Greatest</strong> Ice Cream Flavors'; // doesn't work as expected
+
+myElement.innerHTML = 'The <strong>Greatest</strong> Ice Cream Flavors';  // works as expected
+```
+
+#### An Element's Text Content - Version 2!
+
+We can't close this section out without looking at the `.innerText` property!
+
+Like the `.textContent` property, the `.innerText` property can be used to get/set an element's text content, but there are some important differences between the two properties.
+
+`.textContent` sets/gets the text content of an element...pretty clear and simple.
+
+`.innerText`, on the other hand, is a little tricker. Let's see this in action and then we'll discuss it!
+
+As you saw, `.innerText` will get the visible text of the element. This is an important distinction! **If CSS is used to hide any text inside that element, `.innerText` will not return that text, while `.textContent` will return it.** And it's not just the hiding/showing nature of CSS that `.innerText` adheres to, `.innerText` will also honor changes to things like capitalization.
+
+The `.textContent` property has been a standard for quite a long time. Conversely, `.innerText` property is a relatively new addition to the HTML specification. It has been around for a while but was not fully supported by all browser because it was not a part of the HTML specification.
+
+Between `.textContent` and `.innerText`, you probably want to use `.textContent` since that will return all of the text no matter what. Rarely will you actually want only the visible text.
+
+#### Update Existing Content Recap
+
+In this section, we looked at multiple ways to change page content:
+
+- `.innerHTML`
+- `.textContent`
+- `.innerText`
+
+We saw that to set HTML content for an element, out of the three properties list above, we can only use `.innerHTML`. Using `.textContent` will erroneously include the HTML characters as plain text inside the element.
+
+We also looked at the difference between `.textContent` and `.innerText`. **`.textContent` completely ignores any CSS styling** and returns all of the element's HTML just as it's listed in the HTML. On the other hand, the **`.innerText` property will take CSS styling into consideration** and will return the text that is visibly rendered on the page.
