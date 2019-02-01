@@ -46,6 +46,7 @@ Table of Content
   - [Update Existing Page Content](#update-existing-page-content)
   - [Add New Page Content](#add-new-page-content)
   - [Remove Page Content](#remove-page-content)
+  - [Style Page Content](#style-page-content)
 
 ## Lesson 1: The Document Object Model
 
@@ -710,4 +711,35 @@ We also learned about the following helpful properties:
 - `.parentElement`
 
 The difference between `.firstChild` and `.firstElementChild`, is that `.firstElementChild` will always return the first element, while `.firstChild` might **return whitespace** (if there is any) to preserve the formatting of the underlying HTML source code.
+
+### Style Page Content
+
+In this section, we'll be looking at controlling page and element styling using the following properties and methods:
+
+- `.style.<prop>`
+- `.cssText()`
+- `.setAttribute()`
+- `.className`
+- `.classList`
+
+Before we begin, put these in the correct order of CSS specificity. Put the least-specific option at the top and the most-specific option at the bottom.
+
+<table>
+    <tr>
+        <th>LEVEL OF SPECIFICITY</th>
+        <th>CSS RULE</th>
+    </tr>
+    <tr>
+        <td>Least specific</td>
+        <td>rules in a stylesheet</td>
+    </tr>
+        <td>More specific</td>
+        <td>rules in a &ltstyle&gt tag</td>
+    <tr>
+        <td>Most specific</td>
+        <td>rules in a tag's style attribute</td>
+    </tr>
+</table>
+
+> Basically, the closer the style rule is to an element, the more specific it is. For example, a rule in a style attribute on an element will override a style rule for that element in a CSS stylesheet. There is also the specificity of the type of selector being used. An _ID_ is more specific than a class.
 
