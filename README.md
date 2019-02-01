@@ -44,6 +44,7 @@ Table of Content
 - [Lesson 2: Creating Content with JavaScript](#lesson-2-creating-content-with-javascript)
   - [Introduction](#lesson2-introduction)
   - [Update Existing Page Content](#update-existing-page-content)
+  - [Add New Page Content](#add-new-page-content)
 
 ## Lesson 1: The Document Object Model
 
@@ -495,3 +496,149 @@ In this section, we looked at multiple ways to change page content:
 We saw that to set HTML content for an element, out of the three properties list above, we can only use `.innerHTML`. Using `.textContent` will erroneously include the HTML characters as plain text inside the element.
 
 We also looked at the difference between `.textContent` and `.innerText`. **`.textContent` completely ignores any CSS styling** and returns all of the element's HTML just as it's listed in the HTML. On the other hand, the **`.innerText` property will take CSS styling into consideration** and will return the text that is visibly rendered on the page.
+
+
+### Add New Page Content
+
+You've learned about the document object, the Node Interface, and the Element interface. Where does `.createElement()` come from?
+
+- [x] the `document` object
+- [ ] the Node interface
+- [ ] the element interface
+
+Which of the following would create a new paragraph element?
+
+- [x] `document.createElement('p')`
+- [ ] `element.createElement('p')`
+- [ ] `document.createElement('paragraph')`
+
+#### Adding Content To The Page
+
+You may have noticed that using `document.createElement()` to create an element didn't actually add that newly created element anywhere on the page! Creating an element...just creates it. **It doesn't add it to the DOM.** Since the element isn't added to the DOM, it doesn't appear in the page (if you remember, the DOM is the parsed representation of the page). So, now that we can create brand new elements, we need to be able to add them to the DOM so that they'll show up on the page.
+
+We can use the `.appendChild()` method to add an element to the page! Before we see how this element works, let's quickly define the word "append". There are several different definitions of the word, but I like the wording of the Cambridge Dictionary's the best:
+
+> to add something to the end of a piece of writing
+
+Now, to use the `.appendChild()` method, it needs to be called on another element, not the document object!
+
+```js
+// create a brand new <span> element
+const newSpan = document.createElement('span');
+
+// select the first (main) heading of the page
+const mainHeading = document.querySelector('h1');
+
+// add the the <span> element as the last child element of the main heading
+mainHeading.appendChild(newSpan);
+```
+
+>⚠️ `.appendChild()` Needs An Element! ⚠️  
+>This is stated above, but I wanted to call this out, specifically. When you're using the `.appendChild()` method, it must be called on an existing element. To be clear, you can't call this on the `document` object, so the following will result in an error:
+
+```js
+const newSpan = document.createElement('span');
+
+// causes an error
+document.appendChild(newSpan);
+```
+
+#### Creating Text Nodes
+
+Just like you created new elements with the `.createElement()` method, you can also create new text nodes using the `.createTextNode()` method. Take a look at the following code that:
+
+- creates an paragraph element
+- creates a text node
+- appends the text node to the paragraph
+- appends the paragraph to the tag
+
+```js
+const myPara = document.createElement('p');
+const textOfParagraph = document.createTextNode('I am the text for the paragraph!');
+
+myPara.appendChild(textOfParagraph);
+document.body.appendChild(myPara);
+```
+
+However, since you already know about the `.textContent` property, the code below will provide the exact same result:
+
+```js
+const myPara = document.createElement('p');
+
+myPara.textContent = 'I am the text for the paragraph!';
+document.body.appendChild(myPara);
+```
+
+Therefore, instead of creating a new text node and appending it to an element, it's **faster and easier** to just update the element's text with the `.textContent` property.
+
+What happens after running this code?
+
+```js
+const mainHeading = document.querySelector('#main-heading');
+const otherHeading = document.querySelector('#other-heading');
+const excitedText = document.createElement('span');
+
+excitedText.textContent = '!!!';
+mainHeading.appendChild(excitedText);
+otherHeading.appendChild(excitedText);
+```
+
+- [ ] only mainHeading has three exclamation marks
+- [x] only otherHeading has three exclamation marks
+- [ ] both headings have three exclamation marks
+- [ ] neither has any exclamation marks
+
+> The `.appendChild()` method will move an element from its current position to the new position.
+
+#### Inserting HTML In Other Locations
+
+By definition, the `.appendChild()` method will add an element as the last child of the parent element. It's impossible to put it as the first child or anywhere else...it has to be the last child. Wouldn't it be nice if there were a little flexibility in where we could add the child element?
+
+Enter the `.insertAdjacentHTML()` method! The `.insertAdjacentHTML()` method has to be called with two arguments:
+
+- the location of the HTML
+- the HTML text that is going to be inserted
+
+The first argument to this method will let us insert the new HTML in one of four different locations
+
+- `beforebegin` – inserts the HTML text as a previous sibling 
+- `afterbegin` – inserts the HTML text as the first child 
+- `beforeend` – inserts the HTML text as the last child 
+- `afterend` – inserts the HTML text as a following sibling
+
+A visual example works best, and MDN's documentation has a fantastic example that I'll modify slightly:
+
+```html
+<!-- beforebegin -->
+<p>
+    <!-- afterbegin -->
+    Existing text/HTML content
+    <!-- beforeend -->
+</p>
+<!-- afterend -->
+```
+
+Here's how we'd call `.insertAdjacentHTML()`:
+
+```js
+const mainHeading = document.querySelector('#main-heading');
+const htmlTextToAdd = '<h2>Skydiving is fun!</h2>';
+
+mainHeading.insertAdjacentHTML('afterend', htmlTextToAdd);
+```
+
+#### Add New Page Content Recap
+
+In this section, we learned how to create new DOM elements and add them to the page. We looked at the following methods:
+
+- `.createElement()` to create new elements
+- `.appendChild()` to add a child element to a parent element as its last child
+- `.createTextNode()` to create a text node
+- `.insertAdjacentHTML()` to put HTML text anywhere around an element
+
+Some important things to note are:
+
+- if an element already exists in the DOM and this element is passed to `.appendChild()`, the `.appendChild()` method will move it rather than duplicating it
+- an element's `.textContent` property is used more often than creating a text node with the `.createTextNode()` method
+- the `.insertAdjacentHTML()` method's second argument has to be text, you can't pass an element. `.insertAdjacentElement()` will serve the purpose if you want to pass an element.
+
