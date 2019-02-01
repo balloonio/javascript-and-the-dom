@@ -45,6 +45,7 @@ Table of Content
   - [Introduction](#lesson2-introduction)
   - [Update Existing Page Content](#update-existing-page-content)
   - [Add New Page Content](#add-new-page-content)
+  - [Remove Page Content](#remove-page-content)
 
 ## Lesson 1: The Document Object Model
 
@@ -641,4 +642,72 @@ Some important things to note are:
 - if an element already exists in the DOM and this element is passed to `.appendChild()`, the `.appendChild()` method will move it rather than duplicating it
 - an element's `.textContent` property is used more often than creating a text node with the `.createTextNode()` method
 - the `.insertAdjacentHTML()` method's second argument has to be text, you can't pass an element. `.insertAdjacentElement()` will serve the purpose if you want to pass an element.
+
+### Remove Page Content
+
+#### What's in store!
+
+In this quick section, you're going to learn how to remove content from the page. Specifically, we'll look at these new methods:
+
+- `.removeChild()`
+- `.remove()`
+
+In the process, you'll also learn about these two properties:
+
+- `.firstElementChild`
+- `.parentElement`
+
+#### Removing a Child Element
+
+We can use the `.removeChild()` method to...wait for it...remove a child element. Basically, this is exactly the opposite of the `.appendChild()` method. So just like the `.appendChild()` method, the `.removeChild()` method requires:
+
+- a parent element
+- the child element that will be removed
+
+```js
+<parent-element>.removeChild(<child-to-remove>);
+```
+
+#### A drawback (and workaround!) with the `.removeChild()` Method
+
+Just like the `.appendChild()` method, there's a (somewhat minor) drawback to the `.removeChild()` method. Both methods:
+
+- require access to parent to function
+
+However, we don't actually need to have the parent element because there is a workaround! Just like the `.firstElementChild` property can be called on a parent element to access its first element, every element also has a `parentElement` property that refers to its parent! So if we have access to the child element that we're about to add or remove, you can use the `parentElement` property to "move focus" to the element's parent. Then we can call `.removeChild()` (or `.appendChild()`) on that referenced parent element.
+
+```js
+const mainHeading = document.querySelector('h1');
+
+mainHeading.parentElement.removeChild(mainHeading);
+```
+
+#### Removing a Child Element (Part 2!)
+
+We went through all of those steps selecting an element, using DOM traversal techniques like `.parentElement` and `.firstElementChild`, so that we can remove a child element. I showed you this way so that you can get some exposure and practice to moving around in the DOM.
+
+Now, you might be glad (or frustrated! haha) to find out there's an easier way to do all this! We can move the child element directly with the `.remove()` method:
+
+```js
+const mainHeading = document.querySelector('h1');
+
+mainHeading.remove();
+```
+
+#### Remove Page Content Recap
+
+In this short section, we learned two ways to remove an element from the page. You learned about:
+
+- `.removeChild()`
+- `.remove()`
+
+The difference is that with `.removeChild()` must be called on the parent of the element being removed and must be passed the child to be removed, while `.remove()` can be called directly on the element to delete.
+
+We also learned about the following helpful properties:
+
+- `.firstChild`
+- `.firstElementChild`
+- `.parentElement`
+
+The difference between `.firstChild` and `.firstElementChild`, is that `.firstElementChild` will always return the first element, while `.firstChild` might **return whitespace** (if there is any) to preserve the formatting of the underlying HTML source code.
 
