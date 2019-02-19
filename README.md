@@ -48,6 +48,8 @@ Table of Content
   - [Remove Page Content](#remove-page-content)
   - [Style Page Content](#style-page-content)
   - [Lesson summary](#lesson2-lesson-summary)
+- [Lesson 3: Working with Browser Events](#lesson-3-working-with-browser-events)
+  - [Introduction](#lesson3-introduction)
 
 ## Lesson 1: The Document Object Model
 
@@ -912,3 +914,35 @@ My recommendation to you is that, out of the list of techniques you learned in t
 - Add new content
 - Remove content
 - Style content
+
+## Lesson 3: Working with Browser Events
+
+<a id="lesson3-introduction"></a>
+### Introduction
+
+#### Lesson Overview
+To recap, we'll be looking at :
+
+- Events - what they are
+- Responding to an event - how to listen for an event and respond when one happens
+- Event Data - harness the data that is included with an event
+- Stopping an event - preventing an event from triggering multiple responses
+- Event Lifecycle - the lifecycle stages of an event
+- DOM Readiness - events to know when the DOM itself is ready to be interacted with
+
+#### Seeing An Event
+There is a hidden world of events going on right now on this very page! It's really hard to actually see into this hidden world, though. So how can we know that events really are being announced? If they are being announced, how come they're not easy for us to see?
+
+Fortunately, the Chrome browser has a special `monitorEvents()` function that will let us see different events as they are occurring.
+
+The monitorEvents function will keep spitting out all of the events that are happening on the targeted element until the end of time...that, or until you refresh the page. Alternatively, the Chrome browser does offer an `unmonitorEvents()` function that will turn off the announcing of events for the targeted element:
+
+```javascript
+// start displaying all events on the document object
+monitorEvents(document);
+
+// turn off the displaying of all events on the document object.
+unmonitorEvents(document);
+```
+
+One last little bit of info on `monitorEvents` is that this is for development/testing purposes only. It's not supposed to be used for production code.
