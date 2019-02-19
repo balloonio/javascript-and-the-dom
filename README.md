@@ -257,7 +257,7 @@ Write the DOM code to select the element with ID strawberry-banner.
 
 `document.getElementById("strawberry-banner")`
 
-#### Recap
+#### Select Page Element By ID Recap
 
 In this section, we learned how to select a DOM element by its ID:
 
@@ -317,6 +317,8 @@ There are a few important things to keep in mind about these two methods:
 
 ### Nodes, Elements, and Interfaces...Oh My
 
+#### The `Node` Interface
+
 How the DOM is constructed in the correct order of operation:
 
 - characters
@@ -333,6 +335,23 @@ But what is a "node", exactly?
 > 
 > More specifically, "Node" is an interface that is implemented by multiple other objects, including "document" and "element". All objects implementing the "Node" interface can be treated similarly. The term "node" therefore (in the DOM context) means any object that implements the "Node" interface. Most commonly that is an element object representing a HTML element.
 > https://stackoverflow.com/questions/24974621/what-is-a-node-in-javascript
+
+#### Element Interface
+
+Just like the Node Interface, the Element Interface is a blueprint for creating elements. One really important thing about the Element Interface is that it is a descendent of the Node Interface.
+
+Since Element is pointing at Node, this indicates that the Element Interface inherits all of the Node Interface's properties and methods. This means that any element (lowercase "e"!) that was created from the Element Interface is also a descendent from the Node Interface...which means the element (lowercase "e"!) is also a node (lowercase "n"!).
+
+#### Nodes, Elements, and Interfaces Recap
+
+Hopefully this was an enlightening lesson on a number of fronts! You learned about interfaces, properties, and methods; an interface is like a blueprint, properties are like bits of information or data, and methods are functionality.
+
+We also looked at a couple of specific interfaces:
+
+- Node Interface
+- Element Interface
+
+We saw that both of these interfaces have properties and methods. We also saw how the Element Interface inherits all of the properties and methods from the Node interface.
 
 ### More Ways To Access Elements
 
@@ -367,7 +386,7 @@ document.querySelectorAll('.header');
 document.querySelectorAll('header');
 ```
 
-#### Recap
+#### More Ways To Access Elements Recap
 
 In this section, we took a brief look the history of browser support for standard DOM methods, the rise of the jQuery library, and how jQuery's success brought about new DOM methods. The new DOM methods we looked at are
 
